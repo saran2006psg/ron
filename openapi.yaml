@@ -1,0 +1,33 @@
+openapi: 3.1.0
+info:
+  title: IncuBrix B-roll Video Engine
+  version: 0.1.0
+paths:
+  /api/v1/broll/jobs:
+    post:
+      summary: Create a background B-roll render job
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string}
+      responses:
+        '202': {description: Job accepted}
+        '400': {description: Idempotency key error}
+        '422': {description: Validation error}
+  /api/v1/jobs/{job_id}:
+    get:
+      summary: Read job state and output links
+      parameters:
+        - in: path
+          name: job_id
+          required: true
+          schema: {type: string, format: uuid}
+      responses:
+        '200': {description: Job state}
+        '404': {description: Job not found}
+  /health:
+    get: {summary: Liveness check, responses: {'200': {description: Healthy}}}
+  /ready:
+    get: {summary: Readiness check, responses: {'200': {description: Ready}}}
+
