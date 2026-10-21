@@ -43,15 +43,33 @@ def render_video(ffmpeg_bin: str, narration_audio: Path, clips: list[Path], scen
 
 
 def _validate_output(ffmpeg_bin: str, output: Path, width: int, height: int) -> None:
-    command = [ffmpeg_bin.replace("ffmpeg", "ffprobe"), "-v", "error", "-show_streams", "-of", "json", str(output)]
-    try:
-        result = subprocess.run(command, capture_output=True, text=True, timeout=30, check=True)
-        streams = json.loads(result.stdout).get("streams", [])
-    except (FileNotFoundError, subprocess.SubprocessError, json.JSONDecodeError) as exc:
-        raise RenderError("FFPROBE_VALIDATION_FAILED") from exc
+    import shutil
+    ffprobe_bin = ffmpeg_bin.replace("ffmpeg", "ffprobe")
+    streams = None
+    if shutil.which(ffprobe_bin) or Path(ffprobe_bin).is_file():
+        command = [ffprobe_bin, "-v", "error", "-show_streams", "-of", "json", str(output)]
+        try:
+            result = subprocess.run(command, capture_output=True, text=True, timeout=30, check=True)
+            streams = json.loads(result.stdout).get("streams", [])
+        except Exception:
+            streams = None
+
+    if streams is None:
+        res = subprocess.run([ffmpeg_bin, "-i", str(output)], capture_output=True, text=True, timeout=30)
+        stderr = res.stderr
+        has_video = "Video: h264" in stderr
+        has_audio = "Audio: aac" in stderr
+        has_dims = f"{width}x{height}" in stderr
+        if not (has_video and has_audio):
+            raise RenderError("INVALID_RENDERED_STREAMS")
+        if not has_dims:
+            raise RenderError("INVALID_RENDERED_DIMENSIONS")
+        return
+
     video = next((stream for stream in streams if stream.get("codec_type") == "video"), None)
     audio = next((stream for stream in streams if stream.get("codec_type") == "audio"), None)
     if not video or not audio or video.get("codec_name") != "h264" or audio.get("codec_name") != "aac":
         raise RenderError("INVALID_RENDERED_STREAMS")
     if int(video.get("width", 0)) != width or int(video.get("height", 0)) != height:
         raise RenderError("INVALID_RENDERED_DIMENSIONS")
+

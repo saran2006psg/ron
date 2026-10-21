@@ -11,9 +11,9 @@ from ..config import settings
 from ..models import JobState
 from ..providers.audio import AudioTiming, AudioValidationError, EdgeTTSProvider, MockNarrationProvider
 from ..providers.footage import (
-    FootageCandidate, MockFootageProvider, MultiSourceFootageProvider,
-    PexelsVideoProvider, PixabayVideoProvider, ProviderUnavailableError,
-    apply_safety_filter, download_clip, eligible,
+    DemoFootageProvider, FootageCandidate, MockFootageProvider,
+    MultiSourceFootageProvider, PexelsVideoProvider, PixabayVideoProvider,
+    ProviderUnavailableError, apply_safety_filter, download_clip, eligible,
 )
 from ..services.artifacts import write_audit_artifacts
 from ..services.matching import select_clip
@@ -33,7 +33,9 @@ def _get_narration_provider():
 
 def _get_footage_provider():
     """Select footage provider based on config, with dual-source failover."""
-    if settings.footage_provider == "pexels":
+    if settings.footage_provider == "demo":
+        return DemoFootageProvider(settings.work_dir, settings.ffmpeg_bin)
+    elif settings.footage_provider == "pexels":
         primary = PexelsVideoProvider(settings.pexels_api_key)
         secondary = None
         if settings.pixabay_api_key:

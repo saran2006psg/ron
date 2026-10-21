@@ -18,8 +18,10 @@ def tmp_store(tmp_path):
     return JobStore(db_path)
 
 
-def test_pipeline_runs_with_mock_provider_and_fails_safely(tmp_store):
+def test_pipeline_runs_with_mock_provider_and_fails_safely(tmp_store, monkeypatch):
     """Mock footage is intentionally ineligible — pipeline should fail with a clear error code."""
+    from app.providers.footage import MockFootageProvider
+    monkeypatch.setattr("app.services.pipeline._get_footage_provider", lambda: MockFootageProvider())
     request = {"script": "Cloud computing is changing everything.", "voice": "en-IN-female",
                 "aspect_ratios": ["16:9"], "avoid": [], "captions": {"burn_in": True, "srt": True}}
     job_id, _ = tmp_store.create_or_get("test-pipe-1", request)
