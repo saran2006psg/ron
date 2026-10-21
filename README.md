@@ -4,6 +4,72 @@ An end-to-end, commercial-grade Script and Voiceover to B-roll Video Engine buil
 
 ---
 
+## 🏛️ System Architecture
+
+The IncuBrix B-roll Engine employs a decoupled, safety-first pipeline separating request ingestion, durable state, neural speech synthesis, semantic footage retrieval, rights verification, and multi-ratio FFmpeg composition:
+
+```mermaid
+flowchart TD
+    subgraph INGESTION["1. Client & Ingestion Layer"]
+        UI["🖥️ Creator Studio Web UI<br/>(React + TypeScript)"]
+        CLI["💻 CLI Batch Runner<br/>(batch_runner.py)"]
+        API_CLIENT["🌐 REST Clients / cURL<br/>(OpenAPI 3.1 Contract)"]
+    end
+
+    subgraph GATEWAY["2. API Gateway & Durable State"]
+        FASTAPI["⚡ FastAPI Server (:8000)<br/>Idempotency-Key & Correlation IDs"]
+        STORE[("💾 SQLite Job Store<br/>(broll.db)")]
+        UI -->|HTTP / JSON| FASTAPI
+        CLI -->|Batch POST| FASTAPI
+        API_CLIENT -->|POST /api/v1/broll/jobs| FASTAPI
+        FASTAPI <-->|Unique Constraint & State| STORE
+    end
+
+    subgraph PIPELINE["3. Orchestration & Processing Pipeline"]
+        direction TB
+
+        STAGE1["🎙️ Stage 1: Narration & Audio<br/>• EdgeTTS Neural Synthesis (en/hi/ta)<br/>• MP3/WAV/M4A Upload Validation<br/>• Measured Duration Extraction"]
+        
+        STAGE2["🎬 Stage 2: Scene Planning & Disambiguation<br/>• Sentence-Boundary Splitting<br/>• Disambiguation (cloud, bank, python, mouse, value)<br/>• Visual Query & Visual Hint Mapping"]
+        
+        STAGE3["🔍 Stage 3: Footage Retrieval & Failover<br/>• Primary: Pexels Video API<br/>• Secondary: Pixabay Video API<br/>• Automatic Dual Failover<br/>• Offline Demo Generator (CC0)"]
+        
+        STAGE4["⚖️ Stage 4: Rights Gate & Semantic Matching<br/>• Triple Flag: Commercial + Watermark-Free + Verified<br/>• Non-Repetition Rule (Zero clip repeats)<br/>• Safety Filter (Blocklist & User Avoid)"]
+        
+        STAGE5["⬇️ Stage 5: Clip Download & Validation<br/>• Isolated per-job workspace<br/>• Stream verification & FFprobe checks"]
+        
+        STAGE6["🎞️ Stage 6: FFmpeg Composition<br/>• Per-scene trimming to exact speech timing<br/>• Multi-ratio rendering (16:9, 9:16, 1:1)<br/>• Subtitle burn-in & SRT generation<br/>• H.264/AAC 30fps normalization"]
+
+        STAGE7["📜 Stage 7: Provenance & Audit Artifacts<br/>• timeline.json (clip URLs, creators, licenses)<br/>• manifest.json (models, settings, hashes)<br/>• captions.srt & Final MP4 Pack"]
+
+        FASTAPI -->|Async Worker| STAGE1
+        STAGE1 --> STAGE2
+        STAGE2 --> STAGE3
+        STAGE3 --> STAGE4
+        STAGE4 --> STAGE5
+        STAGE5 --> STAGE6
+        STAGE6 --> STAGE7
+        STAGE7 -.->|Update Progress 5% → 100%| STORE
+    end
+
+    subgraph DELIVERY["4. Delivery & Deliverables"]
+        ARTIFACTS["📦 Static Artifacts Server (/artifacts/{job_id}/)"]
+        VIDEO_OUT["🎬 Rendered MP4s (16:9, 9:16, 1:1)"]
+        TIMELINE_OUT["📋 timeline.json (Asset-level provenance)"]
+        MANIFEST_OUT["📜 manifest.json (Engine & run metadata)"]
+        CAPTIONS_OUT["📝 captions.srt (Synchronized subtitles)"]
+
+        STAGE7 --> ARTIFACTS
+        ARTIFACTS --> VIDEO_OUT
+        ARTIFACTS --> TIMELINE_OUT
+        ARTIFACTS --> MANIFEST_OUT
+        ARTIFACTS --> CAPTIONS_OUT
+        VIDEO_OUT -.->|Real-time Preview| UI
+    end
+```
+
+---
+
 ## ✨ Features & Capabilities
 
 - **Multi-Mode Ingestion**:
