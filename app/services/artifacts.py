@@ -35,10 +35,48 @@ def write_audit_artifacts(output_dir: Path, job_id: str, scenes: list[dict], sel
 
 
 def _srt(scenes: list[dict]) -> str:
+    import textwrap
     blocks = []
-    for number, scene in enumerate(scenes, 1):
-        blocks.append(f"{number}\n{_timestamp(scene['start'])} --> {_timestamp(scene['end'])}\n{scene['text']}\n")
+    cue_index = 1
+    for scene in scenes:
+        text = scene["text"].strip()
+        start = float(scene["start"])
+        end = float(scene["end"])
+        if len(text) <= 42:
+            wrapped = "\n".join(textwrap.wrap(text, width=28))
+            blocks.append(f"{cue_index}\n{_timestamp(start)} --> {_timestamp(end)}\n{wrapped}\n")
+            cue_index += 1
+            continue
+
+        words = text.split()
+        chunks: list[str] = []
+        cur_words: list[str] = []
+        cur_len = 0
+        for w in words:
+            if cur_len + len(w) + (1 if cur_words else 0) > 40 and cur_words:
+                chunks.append(" ".join(cur_words))
+                cur_words = [w]
+                cur_len = len(w)
+            else:
+                cur_words.append(w)
+                cur_len += len(w) + (1 if len(cur_words) > 1 else 0)
+        if cur_words:
+            chunks.append(" ".join(cur_words))
+
+        total_chars = sum(len(c) for c in chunks) or 1
+        dur = end - start
+        cur_t = start
+        for i, chunk in enumerate(chunks):
+            c_dur = dur * (len(chunk) / total_chars)
+            c_end = cur_t + c_dur if i < len(chunks) - 1 else end
+            wrapped = "\n".join(textwrap.wrap(chunk, width=28))
+            blocks.append(f"{cue_index}\n{_timestamp(cur_t)} --> {_timestamp(c_end)}\n{wrapped}\n")
+            cue_index += 1
+            cur_t = c_end
+
     return "\n".join(blocks)
+
+
 
 
 def _timestamp(seconds: float) -> str:

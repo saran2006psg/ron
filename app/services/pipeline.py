@@ -43,9 +43,7 @@ def _get_footage_provider():
         return MultiSourceFootageProvider(primary, secondary)
     elif settings.footage_provider == "pixabay":
         primary = PixabayVideoProvider(settings.pixabay_api_key)
-        secondary = None
-        if settings.pexels_api_key:
-            secondary = PexelsVideoProvider(settings.pexels_api_key)
+        secondary = PexelsVideoProvider(settings.pexels_api_key) if settings.pexels_api_key else DemoFootageProvider(settings.work_dir, settings.ffmpeg_bin)
         return MultiSourceFootageProvider(primary, secondary)
     elif settings.footage_provider == "multi":
         providers = []

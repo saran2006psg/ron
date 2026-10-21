@@ -55,9 +55,22 @@ def render_video(ffmpeg_bin: str, narration_audio: Path, clips: list[Path], scen
         sub_filter = ""
         if burn_in and captions_srt and captions_srt.is_file():
             srt_escaped = captions_srt.resolve().as_posix().replace(":", r"\:").replace("'", r"\'")
-            font_size = 24 if height >= 1920 else 18
-            margin_v = 45 if ratio == "9:16" else 28
-            sub_filter = f",subtitles='{srt_escaped}':force_style='FontSize={font_size},FontName=Arial,Bold=1,PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,BorderStyle=3,Outline=2,Shadow=1,Alignment=2,MarginV={margin_v}'"
+            if ratio == "9:16":
+                font_size = 11
+                margin_v = 45
+            elif ratio == "1:1":
+                font_size = 11
+                margin_v = 35
+            else:  # 16:9
+                font_size = 12
+                margin_v = 30
+
+            sub_filter = (
+                f",subtitles='{srt_escaped}':force_style="
+                f"'FontName=Arial,FontSize={font_size},Bold=1,PrimaryColour=&H00FFFFFF,"
+                f"OutlineColour=&H00000000,BorderStyle=1,Outline=1.0,Shadow=0.5,"
+                f"Alignment=2,MarginV={margin_v}'"
+            )
 
         command = [
             ffmpeg_bin, "-y",

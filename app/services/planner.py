@@ -52,9 +52,29 @@ DISAMBIGUATION: dict[str, dict[str, str]] = {
 }
 
 
+STOPWORDS = {
+    "a", "about", "above", "after", "again", "against", "all", "am", "an", "and", "any", "are",
+    "as", "at", "be", "because", "been", "before", "being", "below", "between", "both", "but", "by",
+    "did", "do", "does", "doing", "down", "during", "each", "few", "for", "from", "further", "had",
+    "has", "have", "having", "he", "her", "here", "hers", "him", "his", "how", "i", "if", "in", "into",
+    "is", "it", "its", "me", "more", "most", "my", "myself", "no", "nor", "not", "of", "off", "on",
+    "once", "only", "or", "other", "our", "ours", "out", "over", "own", "same", "she", "so", "some",
+    "such", "than", "that", "the", "their", "theirs", "them", "then", "there", "these", "they", "this",
+    "those", "through", "to", "too", "under", "until", "up", "very", "was", "we", "were", "what", "when",
+    "where", "which", "while", "who", "whom", "why", "with", "you", "your", "yours"
+}
+
+
 def plan_scenes(script: str | None, supplied: list[dict] | None = None, duration: float | None = None) -> list[dict]:
-    raw = supplied or [{"text": piece.strip(), "visual_hint": None}
-                       for piece in re.split(r"(?<=[.!?])\s+", script or "") if piece.strip()]
+    if supplied:
+        raw = supplied
+    else:
+        raw_pieces = re.split(r"(?<=[.!?])\s+|\n+", script or "")
+        raw = []
+        for piece in raw_pieces:
+            clean = re.sub(r"^[\s#*\->]+", "", piece).strip()
+            if clean:
+                raw.append({"text": clean, "visual_hint": None})
     if not raw:
         raise ValueError("No scenes could be planned")
     durations = _durations(raw, duration)
@@ -98,9 +118,23 @@ def _disambiguate_query(text: str, words: set[str]) -> str:
         # No context found — use default interpretation
         default = context_map.get("default")
         if default:
-            # Replace just the ambiguous word in the query with the default
-            return text
-    return text
+            return default
+
+    # Clean text of markdown, punctuation, and extract concise visual keywords
+    clean = re.sub(r"[#*_\r\n]+", " ", text).strip()
+    clean = re.sub(r"[^\w\s-]", " ", clean)
+    clean = re.sub(r"\s+", " ", clean).strip()
+    if len(clean) <= 60:
+        return clean
+    words_list = [w for w in clean.split() if w.lower() not in STOPWORDS]
+    picked = []
+    curr = 0
+    for w in words_list[:6]:
+        if curr + len(w) + 1 > 60:
+            break
+        picked.append(w)
+        curr += len(w) + 1
+    return " ".join(picked) if picked else clean[:60]
 
 
 def _durations(scenes: list[dict], total: float | None) -> list[float]:

@@ -198,17 +198,50 @@ class PixabayVideoProvider:
 
     def search(self, query: str, avoid: list[str]) -> list[FootageCandidate]:
         retrieval_time = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        # Pixabay requires q <= 100 characters and no newlines/special characters
+        clean_q = re.sub(r"[#\r\n\t,;:\"'?!()\[\]{}]", " ", query).strip()
+        clean_q = re.sub(r"\s+", " ", clean_q)
+        if len(clean_q) > 80:
+            words = clean_q.split()
+            trimmed = []
+            cur_len = 0
+            for w in words:
+                if cur_len + len(w) + 1 > 80:
+                    break
+                trimmed.append(w)
+                cur_len += len(w) + 1
+            clean_q = " ".join(trimmed) or clean_q[:80]
+
+        response = None
         try:
             response = httpx.get("https://pixabay.com/api/videos/",
-                                 params={"key": self.api_key, "q": query, "per_page": 15, "safesearch": "true"},
+                                 params={"key": self.api_key, "q": clean_q, "per_page": 15, "safesearch": "true"},
                                  timeout=20)
+            if response.status_code == 400 and len(clean_q.split()) > 2:
+                fallback_q = " ".join(clean_q.split()[:2])
+                response = httpx.get("https://pixabay.com/api/videos/",
+                                     params={"key": self.api_key, "q": fallback_q, "per_page": 15, "safesearch": "true"},
+                                     timeout=20)
             response.raise_for_status()
         except httpx.HTTPError as exc:
             log.warning("Pixabay API error: %s", exc)
             raise ProviderUnavailableError(f"PROVIDER_UNAVAILABLE: Pixabay - {exc}") from exc
+
         candidates = []
         avoid_lower = {a.lower() for a in avoid}
-        for hit in response.json().get("hits", []):
+        hits = response.json().get("hits", [])
+        if not hits and len(clean_q.split()) > 2:
+            try:
+                fallback_q = " ".join(clean_q.split()[:2])
+                fb_res = httpx.get("https://pixabay.com/api/videos/",
+                                   params={"key": self.api_key, "q": fallback_q, "per_page": 15, "safesearch": "true"},
+                                   timeout=20)
+                if fb_res.status_code == 200:
+                    hits = fb_res.json().get("hits", [])
+            except Exception:
+                pass
+
+        for hit in hits:
             tags = hit.get("tags", "").lower()
             if any(term in tags for term in avoid_lower):
                 continue
@@ -224,7 +257,7 @@ class PixabayVideoProvider:
                 creator=hit.get("user"),
                 attribution=None, commercial_use=True, watermark_free=True,
                 ai_generated=False, rights_verified=True,
-                rationale=f"Pixabay API result for '{query}'",
+                rationale=f"Pixabay API result for '{clean_q}'",
                 retrieval_time=retrieval_time))
         return candidates
 
