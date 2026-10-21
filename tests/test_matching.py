@@ -1,4 +1,4 @@
-from app.providers.footage import FootageCandidate
+from app.providers.footage import FootageCandidate, apply_safety_filter
 from app.services.matching import select_clip
 
 
@@ -17,3 +17,18 @@ def test_matching_requires_eligible_relevant_unrepeated_asset():
 def test_matching_never_accepts_failed_rights():
     result = select_clip({"text": "cloud", "query": "cloud"}, [item("a", "cloud", commercial=False)], set())
     assert result.reason == "NO_ELIGIBLE_UNREPEATED_CANDIDATE"
+
+
+def test_safety_filter_removes_blocked_terms():
+    safe = item("a", "beautiful sunset over ocean")
+    unsafe = item("b", "nudity explicit content")
+    filtered = apply_safety_filter([safe, unsafe], [])
+    assert len(filtered) == 1
+    assert filtered[0].asset_url == "a"
+
+
+def test_safety_filter_user_avoid_list():
+    clips = [item("a", "puppies playing"), item("b", "cats sleeping")]
+    filtered = apply_safety_filter(clips, ["cats"])
+    assert len(filtered) == 1
+    assert filtered[0].asset_url == "a"

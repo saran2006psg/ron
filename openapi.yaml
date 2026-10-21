@@ -2,32 +2,229 @@ openapi: 3.1.0
 info:
   title: IncuBrix B-roll Video Engine
   version: 0.1.0
+  description: |
+    Script and Voiceover to B-roll Video Engine.
+    Accepts narration text, audio files, or structured scenes and produces
+    commercially licensed B-roll videos with captions and audit artifacts.
 paths:
   /api/v1/broll/jobs:
     post:
-      summary: Create a background B-roll render job
+      summary: Create a background B-roll render job (JSON)
+      operationId: createJob
       parameters:
         - in: header
           name: Idempotency-Key
           required: true
-          schema: {type: string}
+          schema: {type: string, maxLength: 255}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateJobRequest'
       responses:
-        '202': {description: Job accepted}
-        '400': {description: Idempotency key error}
-        '422': {description: Validation error}
+        '202':
+          description: Job accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAccepted'
+        '400':
+          description: Idempotency key error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '422':
+          description: Validation error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/v1/broll/jobs/upload:
+    post:
+      summary: Create a B-roll render job with audio file upload
+      operationId: createJobUpload
+      parameters:
+        - in: header
+          name: Idempotency-Key
+          required: true
+          schema: {type: string, maxLength: 255}
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [audio]
+              properties:
+                audio:
+                  type: string
+                  format: binary
+                  description: MP3, WAV, or M4A audio file (up to 100 MB, 10 minutes)
+                script:
+                  type: string
+                  description: Optional narration script text
+                voice:
+                  type: string
+                  default: en-IN-female
+                aspect_ratios:
+                  type: string
+                  default: "16:9"
+                  description: Comma-separated aspect ratios (16:9, 9:16, 1:1)
+                style:
+                  type: string
+                  default: "bright, modern, real-world footage"
+                avoid:
+                  type: string
+                  description: Comma-separated terms to avoid
+                burn_in:
+                  type: boolean
+                  default: true
+                srt:
+                  type: boolean
+                  default: true
+      responses:
+        '202':
+          description: Job accepted
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobAccepted'
+        '400':
+          description: Idempotency key error
+        '422':
+          description: Validation error
+
   /api/v1/jobs/{job_id}:
     get:
       summary: Read job state and output links
+      operationId: getJob
       parameters:
         - in: path
           name: job_id
           required: true
           schema: {type: string, format: uuid}
       responses:
-        '200': {description: Job state}
-        '404': {description: Job not found}
-  /health:
-    get: {summary: Liveness check, responses: {'200': {description: Healthy}}}
-  /ready:
-    get: {summary: Readiness check, responses: {'200': {description: Ready}}}
+        '200':
+          description: Job state
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/JobStatus'
+        '404':
+          description: Job not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
 
+  /health:
+    get:
+      summary: Liveness check
+      responses:
+        '200': {description: Healthy}
+
+  /ready:
+    get:
+      summary: Readiness check
+      responses:
+        '200': {description: Ready}
+
+components:
+  schemas:
+    CreateJobRequest:
+      type: object
+      description: Provide exactly one of audio_url, script, or scenes.
+      properties:
+        audio_url:
+          type: string
+          format: uri
+          description: URL to narration audio (MP3, WAV, M4A)
+        script:
+          type: string
+          maxLength: 30000
+          description: Narration text script
+        scenes:
+          type: array
+          maxItems: 100
+          items:
+            $ref: '#/components/schemas/SceneInput'
+        voice:
+          type: string
+          default: en-IN-female
+          maxLength: 100
+        aspect_ratios:
+          type: array
+          items:
+            type: string
+            enum: ["16:9", "9:16", "1:1"]
+          default: ["16:9"]
+        style:
+          type: string
+          default: "bright, modern, real-world footage"
+          maxLength: 500
+        avoid:
+          type: array
+          items: {type: string}
+          maxItems: 30
+        captions:
+          $ref: '#/components/schemas/Captions'
+        callback_url:
+          type: string
+          format: uri
+
+    SceneInput:
+      type: object
+      required: [text]
+      properties:
+        text:
+          type: string
+          minLength: 1
+          maxLength: 4000
+        visual_hint:
+          type: string
+          maxLength: 1000
+
+    Captions:
+      type: object
+      properties:
+        burn_in: {type: boolean, default: true}
+        srt: {type: boolean, default: true}
+
+    JobAccepted:
+      type: object
+      properties:
+        job_id: {type: string}
+        status: {type: string, enum: [queued, running, succeeded, failed]}
+        reused: {type: boolean, default: false}
+
+    JobStatus:
+      type: object
+      properties:
+        job_id: {type: string}
+        status: {type: string, enum: [queued, running, succeeded, failed]}
+        progress: {type: integer, minimum: 0, maximum: 100}
+        error:
+          $ref: '#/components/schemas/ErrorBody'
+        result_links:
+          type: object
+          additionalProperties: {type: string}
+        warnings:
+          type: array
+          items: {type: string}
+
+    ErrorBody:
+      type: object
+      properties:
+        code: {type: string}
+        message: {type: string}
+        retryable: {type: boolean, default: false}
+        details: {type: object}
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorBody'
