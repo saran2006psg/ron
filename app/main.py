@@ -146,3 +146,9 @@ def get_job(job_id: str):
     if not job:
         return error("JOB_NOT_FOUND", "Job does not exist", 404)
     return JobStatus(job_id=job_id, status=JobState(job["state"]), progress=job["progress"], error=job["error_json"], result_links=job["results_json"] or {}, warnings=job["warnings_json"] or [])
+
+
+# Serve frontend UI at root if built
+frontend_dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
+if frontend_dist.is_dir():
+    app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")
