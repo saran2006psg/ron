@@ -1,0 +1,72 @@
+{
+  "job_id": "07777da6-dc87-4e77-af54-e9f429c9abe9",
+  "scenes": [
+    {
+      "scene_id": "scene-001",
+      "narration_text": "Once upon a time, in a small village surrounded by mountains, there lived a young girl who dreamed of exploring the world.",
+      "start": 0.0,
+      "end": 7.282,
+      "visual_query": "upon time small village surrounded mountains",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2024/03/24/205423-926957402_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "adege",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.4
+    },
+    {
+      "scene_id": "scene-002",
+      "narration_text": "She spent her days reading books about distant lands and exotic animals.",
+      "start": 7.282,
+      "end": 11.255,
+      "visual_query": "spent days reading books distant lands",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2023/10/15/185092-874643408_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "stefaniejockschat",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.4
+    },
+    {
+      "scene_id": "scene-003",
+      "narration_text": "One morning, she packed a small bag and set off on an adventure that would change her life forever.",
+      "start": 11.255,
+      "end": 17.544,
+      "visual_query": "One morning packed small bag set",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2018/05/12/16166-269541539_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "anncapictures",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.4
+    }
+  ],
+  "duration": 17.544
+}

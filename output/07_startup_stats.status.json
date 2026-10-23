@@ -1,0 +1,15 @@
+{
+  "job_id": "4139aabf-4820-42c1-bd0f-4db7311cc937",
+  "status": "succeeded",
+  "progress": 100,
+  "error": null,
+  "result_links": {
+    "video_16x9": "http://localhost:8000/artifacts/4139aabf-4820-42c1-bd0f-4db7311cc937/output_16x9.mp4",
+    "timeline": "http://localhost:8000/artifacts/4139aabf-4820-42c1-bd0f-4db7311cc937/timeline.json",
+    "manifest": "http://localhost:8000/artifacts/4139aabf-4820-42c1-bd0f-4db7311cc937/manifest.json",
+    "captions": "http://localhost:8000/artifacts/4139aabf-4820-42c1-bd0f-4db7311cc937/captions.srt"
+  },
+  "warnings": [
+    "Generated with en-US-JennyNeural via edge-tts"
+  ]
+}

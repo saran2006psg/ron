@@ -1,0 +1,31 @@
+1
+00:00:00,000 --> 00:00:02,171
+Cloud computing is
+transforming how
+
+2
+00:00:02,171 --> 00:00:03,349
+businesses operate.
+
+3
+00:00:03,349 --> 00:00:06,341
+Companies are moving their
+data to the
+
+4
+00:00:06,341 --> 00:00:08,860
+cloud for better scalability
+and
+
+5
+00:00:08,860 --> 00:00:09,569
+security.
+
+6
+00:00:09,569 --> 00:00:12,646
+This shift allows teams to
+collaborate
+
+7
+00:00:12,646 --> 00:00:14,832
+from anywhere in the world.

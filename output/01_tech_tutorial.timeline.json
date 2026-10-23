@@ -1,0 +1,76 @@
+{
+  "job_id": "8934e582-4d4f-4f45-baaa-6290e8b0f4a5",
+  "scenes": [
+    {
+      "scene_id": "scene-001",
+      "narration_text": "Cloud computing is transforming how businesses operate.",
+      "start": 0.0,
+      "end": 3.349,
+      "visual_query": "cloud computing data center servers",
+      "warnings": [
+        "AMBIGUOUS_TERM_REQUIRES_CONTEXT"
+      ],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2026/10/02/380334_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "MrWashingt0n",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.357
+    },
+    {
+      "scene_id": "scene-002",
+      "narration_text": "Companies are moving their data to the cloud for better scalability and security.",
+      "start": 3.349,
+      "end": 9.569,
+      "visual_query": "sky clouds nature",
+      "warnings": [
+        "AMBIGUOUS_TERM_REQUIRES_CONTEXT"
+      ],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2016/02/13/2142-155246338_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "FindingFootage",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.25
+    },
+    {
+      "scene_id": "scene-003",
+      "narration_text": "This shift allows teams to collaborate from anywhere in the world.",
+      "start": 9.569,
+      "end": 14.832,
+      "visual_query": "shift allows teams collaborate anywhere world",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2019/05/22/23863-337770340_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "RafterJr72",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.4
+    }
+  ],
+  "duration": 14.832
+}

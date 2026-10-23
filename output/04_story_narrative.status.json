@@ -1,0 +1,15 @@
+{
+  "job_id": "07777da6-dc87-4e77-af54-e9f429c9abe9",
+  "status": "succeeded",
+  "progress": 100,
+  "error": null,
+  "result_links": {
+    "video_16x9": "http://localhost:8000/artifacts/07777da6-dc87-4e77-af54-e9f429c9abe9/output_16x9.mp4",
+    "timeline": "http://localhost:8000/artifacts/07777da6-dc87-4e77-af54-e9f429c9abe9/timeline.json",
+    "manifest": "http://localhost:8000/artifacts/07777da6-dc87-4e77-af54-e9f429c9abe9/manifest.json",
+    "captions": "http://localhost:8000/artifacts/07777da6-dc87-4e77-af54-e9f429c9abe9/captions.srt"
+  },
+  "warnings": [
+    "Generated with en-GB-SoniaNeural via edge-tts"
+  ]
+}

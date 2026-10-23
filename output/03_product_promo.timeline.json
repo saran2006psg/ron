@@ -1,0 +1,72 @@
+{
+  "job_id": "9cdca90f-b229-4444-8431-f965f09c59ff",
+  "scenes": [
+    {
+      "scene_id": "scene-001",
+      "narration_text": "Welcome to our product showcase!",
+      "start": 0.0,
+      "end": 2.37,
+      "visual_query": "Welcome to our product showcase",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2020/04/18/36510-411342239_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Joker911",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.308
+    },
+    {
+      "scene_id": "scene-002",
+      "narration_text": "This revolutionary device features a sleek design and cutting-edge technology.",
+      "start": 2.37,
+      "end": 7.584,
+      "visual_query": "revolutionary device features sleek design cutting-edge",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2023/05/31/165234-832460016_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "tommyvideo",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.438
+    },
+    {
+      "scene_id": "scene-003",
+      "narration_text": "Order now and experience the future of innovation.",
+      "start": 7.584,
+      "end": 11.376,
+      "visual_query": "Order now and experience the future of innovation",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2021/10/13/91998-631504261_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "kelvinmedia",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.438
+    }
+  ],
+  "duration": 11.376
+}

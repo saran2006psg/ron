@@ -13,8 +13,11 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 
 from .config import settings
-from .models import CreateJobRequest, ErrorResponse, JobAccepted, JobState, JobStatus
-from .services.pipeline import run_job
+from .models import (
+    CreateJobRequest, ErrorResponse, JobAccepted, JobState, JobStatus,
+    SwapClipRequest, SwapClipResponse
+)
+from .services.pipeline import run_job, swap_scene_clip
 from .store import JobStore
 
 logging.basicConfig(level=logging.INFO, format='{"timestamp":"%(asctime)s","level":"%(levelname)s","message":"%(message)s"}')
@@ -148,7 +151,26 @@ def get_job(job_id: str):
     return JobStatus(job_id=job_id, status=JobState(job["state"]), progress=job["progress"], error=job["error_json"], result_links=job["results_json"] or {}, warnings=job["warnings_json"] or [])
 
 
+@app.post("/api/v1/jobs/{job_id}/swap", response_model=SwapClipResponse, responses={400: {"model": ErrorResponse}, 404: {"model": ErrorResponse}})
+def swap_clip_endpoint(job_id: str, body: SwapClipRequest):
+    """Swap a single scene clip and re-render only the affected video."""
+    try:
+        result = swap_scene_clip(store, job_id, body.scene_id, body.new_query, body.new_asset_url)
+        return SwapClipResponse(**result)
+    except ValueError as exc:
+        code, _, msg = str(exc).partition(":")
+        return error(code.strip(), msg.strip() or str(exc), 404 if "NOT_FOUND" in code else 400)
+    except FileNotFoundError as exc:
+        return error("TIMELINE_NOT_FOUND", str(exc), 404)
+    except RuntimeError as exc:
+        return error("SWAP_FAILED", str(exc), 422)
+    except Exception as exc:
+        log.exception("swap_clip_failed")
+        return error("INTERNAL_SWAP_ERROR", str(exc), 500)
+
+
 # Serve frontend UI at root if built
 frontend_dist = Path(__file__).resolve().parent.parent / "frontend" / "dist"
 if frontend_dist.is_dir():
     app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")
+

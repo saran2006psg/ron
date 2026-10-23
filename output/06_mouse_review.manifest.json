@@ -1,0 +1,35 @@
+{
+  "job_id": "5cd04464-65d5-4777-afc7-1a1e840fac13",
+  "providers": {
+    "narration": {
+      "provider": "edge-tts",
+      "model": "edge-tts-neural",
+      "duration": 14.88,
+      "voice": "en-US-male"
+    }
+  },
+  "settings": {
+    "aspect_ratios": [
+      "16:9"
+    ],
+    "style": "tech review, clean, professional",
+    "avoid": [
+      "animals",
+      "rodents"
+    ],
+    "captions": {
+      "burn_in": true,
+      "srt": true
+    }
+  },
+  "warnings": [
+    "Generated with en-US-GuyNeural via edge-tts"
+  ],
+  "cost_estimate": {
+    "value": null,
+    "status": "unavailable"
+  },
+  "render": {
+    "status": "not_rendered"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "job_id": "9cdca90f-b229-4444-8431-f965f09c59ff",
+  "providers": {
+    "narration": {
+      "provider": "edge-tts",
+      "model": "edge-tts-neural",
+      "duration": 11.376,
+      "voice": "en-US-female"
+    }
+  },
+  "settings": {
+    "aspect_ratios": [
+      "1:1"
+    ],
+    "style": "vibrant, energetic, product promotion",
+    "avoid": [],
+    "captions": {
+      "burn_in": true,
+      "srt": true
+    }
+  },
+  "warnings": [
+    "Generated with en-US-JennyNeural via edge-tts"
+  ],
+  "cost_estimate": {
+    "value": null,
+    "status": "unavailable"
+  },
+  "render": {
+    "status": "not_rendered"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "job_id": "61fded87-c941-4936-995e-8d0a03d10144",
+  "providers": {
+    "narration": {
+      "provider": "edge-tts",
+      "model": "edge-tts-neural",
+      "duration": 13.56,
+      "voice": "en-US-male"
+    }
+  },
+  "settings": {
+    "aspect_ratios": [
+      "16:9",
+      "9:16"
+    ],
+    "style": "news, professional, urgent",
+    "avoid": [
+      "violence",
+      "blood"
+    ],
+    "captions": {
+      "burn_in": true,
+      "srt": true
+    }
+  },
+  "warnings": [
+    "Generated with en-US-GuyNeural via edge-tts"
+  ],
+  "cost_estimate": {
+    "value": null,
+    "status": "unavailable"
+  },
+  "render": {
+    "status": "not_rendered"
+  }
+}

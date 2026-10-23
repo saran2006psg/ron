@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:02,787
+The mouse is an essential
+input device
+
+2
+00:00:02,787 --> 00:00:04,547
+for every computer user.
+
+3
+00:00:04,547 --> 00:00:07,278
+Whether you prefer a wired
+or wireless
+
+4
+00:00:07,278 --> 00:00:10,154
+mouse, ergonomic design
+matters for long
+
+5
+00:00:10,154 --> 00:00:11,160
+hours of work.
+
+6
+00:00:11,160 --> 00:00:12,993
+Modern mice come with
+programmable
+
+7
+00:00:12,993 --> 00:00:14,880
+buttons and adjustable
+sensitivity.

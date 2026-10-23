@@ -1,0 +1,36 @@
+{
+  "job_id": "3bf4c00e-2e21-4a4c-9a0a-dc74c5888cc9",
+  "providers": {
+    "narration": {
+      "provider": "edge-tts",
+      "model": "edge-tts-neural",
+      "duration": 17.28,
+      "voice": "en-IN-male"
+    }
+  },
+  "settings": {
+    "aspect_ratios": [
+      "16:9",
+      "9:16"
+    ],
+    "style": "educational, clean, modern",
+    "avoid": [
+      "snakes",
+      "reptiles"
+    ],
+    "captions": {
+      "burn_in": true,
+      "srt": true
+    }
+  },
+  "warnings": [
+    "Generated with en-IN-PrabhatNeural via edge-tts"
+  ],
+  "cost_estimate": {
+    "value": null,
+    "status": "unavailable"
+  },
+  "render": {
+    "status": "not_rendered"
+  }
+}

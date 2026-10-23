@@ -1,0 +1,17 @@
+{
+  "job_id": "9db46bc4-7fa1-4b9a-a568-6b65e975784f",
+  "status": "succeeded",
+  "progress": 100,
+  "error": null,
+  "result_links": {
+    "video_16x9": "http://localhost:8000/artifacts/9db46bc4-7fa1-4b9a-a568-6b65e975784f/output_16x9.mp4",
+    "video_9x16": "http://localhost:8000/artifacts/9db46bc4-7fa1-4b9a-a568-6b65e975784f/output_9x16.mp4",
+    "video_1x1": "http://localhost:8000/artifacts/9db46bc4-7fa1-4b9a-a568-6b65e975784f/output_1x1.mp4",
+    "timeline": "http://localhost:8000/artifacts/9db46bc4-7fa1-4b9a-a568-6b65e975784f/timeline.json",
+    "manifest": "http://localhost:8000/artifacts/9db46bc4-7fa1-4b9a-a568-6b65e975784f/manifest.json",
+    "captions": "http://localhost:8000/artifacts/9db46bc4-7fa1-4b9a-a568-6b65e975784f/captions.srt"
+  },
+  "warnings": [
+    "Generated with en-US-JennyNeural via edge-tts"
+  ]
+}

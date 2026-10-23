@@ -1,0 +1,36 @@
+{
+  "job_id": "5f346a67-ce6c-4e04-8c26-b7fdfd43ab96",
+  "providers": {
+    "narration": {
+      "provider": "edge-tts",
+      "model": "edge-tts-neural",
+      "duration": 15.96,
+      "voice": "en-IN-female"
+    }
+  },
+  "settings": {
+    "aspect_ratios": [
+      "16:9",
+      "1:1"
+    ],
+    "style": "environmental, hopeful, modern",
+    "avoid": [
+      "pollution",
+      "smoke"
+    ],
+    "captions": {
+      "burn_in": true,
+      "srt": true
+    }
+  },
+  "warnings": [
+    "Generated with en-IN-NeerjaNeural via edge-tts"
+  ],
+  "cost_estimate": {
+    "value": null,
+    "status": "unavailable"
+  },
+  "render": {
+    "status": "not_rendered"
+  }
+}

@@ -1,0 +1,32 @@
+1
+00:00:00,000 --> 00:00:03,145
+Python is one of the most
+popular
+
+2
+00:00:03,145 --> 00:00:06,480
+programming languages in the
+world.
+
+3
+00:00:06,480 --> 00:00:09,900
+Its simple syntax makes it
+perfect for
+
+4
+00:00:09,900 --> 00:00:10,800
+beginners.
+
+5
+00:00:10,800 --> 00:00:13,287
+Data scientists use Python
+extensively
+
+6
+00:00:13,287 --> 00:00:15,578
+for machine learning and
+artificial
+
+7
+00:00:15,578 --> 00:00:17,280
+intelligence applications.

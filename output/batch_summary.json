@@ -1,0 +1,52 @@
+[
+  {
+    "file": "01_tech_tutorial.json",
+    "job_id": "8934e582-4d4f-4f45-baaa-6290e8b0f4a5",
+    "status": "succeeded"
+  },
+  {
+    "file": "02_finance_news.json",
+    "job_id": "61fded87-c941-4936-995e-8d0a03d10144",
+    "status": "succeeded"
+  },
+  {
+    "file": "03_product_promo.json",
+    "job_id": "9cdca90f-b229-4444-8431-f965f09c59ff",
+    "status": "succeeded"
+  },
+  {
+    "file": "04_story_narrative.json",
+    "job_id": "07777da6-dc87-4e77-af54-e9f429c9abe9",
+    "status": "succeeded"
+  },
+  {
+    "file": "05_python_tutorial.json",
+    "job_id": "3bf4c00e-2e21-4a4c-9a0a-dc74c5888cc9",
+    "status": "succeeded"
+  },
+  {
+    "file": "06_mouse_review.json",
+    "job_id": "5cd04464-65d5-4777-afc7-1a1e840fac13",
+    "status": "succeeded"
+  },
+  {
+    "file": "07_startup_stats.json",
+    "job_id": "4139aabf-4820-42c1-bd0f-4db7311cc937",
+    "status": "succeeded"
+  },
+  {
+    "file": "08_wellness_vertical.json",
+    "job_id": "8e873d09-eb0e-4d1e-8781-ed6edfc1dbe6",
+    "status": "succeeded"
+  },
+  {
+    "file": "09_green_energy_scenes.json",
+    "job_id": "5f346a67-ce6c-4e04-8c26-b7fdfd43ab96",
+    "status": "succeeded"
+  },
+  {
+    "file": "10_cooking_all_ratios.json",
+    "job_id": "9db46bc4-7fa1-4b9a-a568-6b65e975784f",
+    "status": "succeeded"
+  }
+]

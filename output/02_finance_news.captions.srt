@@ -1,0 +1,28 @@
+1
+00:00:00,000 --> 00:00:02,625
+Breaking news from the
+financial sector.
+
+2
+00:00:02,625 --> 00:00:05,301
+The central bank announced
+new interest
+
+3
+00:00:05,301 --> 00:00:06,124
+rates today.
+
+4
+00:00:06,124 --> 00:00:08,716
+Markets responded with a
+sharp rise in
+
+5
+00:00:08,716 --> 00:00:10,831
+banking stocks, while
+investors
+
+6
+00:00:10,831 --> 00:00:13,560
+evaluated the value of their
+portfolios.

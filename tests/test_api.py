@@ -98,3 +98,20 @@ def test_upload_valid_audio_accepted():
     data = response.json()
     assert "job_id" in data
     assert data["status"] in {"queued", "running"}
+
+
+def test_swap_clip_job_not_found():
+    response = client.post("/api/v1/jobs/nonexistent-id/swap", json={"scene_id": "scene-001"})
+    assert response.status_code == 404
+    assert response.json()["error"]["code"] == "JOB_NOT_FOUND"
+
+
+def test_swap_clip_job_not_ready():
+    # Create a job that is still queued/running
+    key = f"test-swap-{uuid.uuid4()}"
+    res = client.post("/api/v1/broll/jobs", json={"script": "Test script."}, headers={"Idempotency-Key": key})
+    job_id = res.json()["job_id"]
+    response = client.post(f"/api/v1/jobs/{job_id}/swap", json={"scene_id": "scene-001"})
+    assert response.status_code == 400
+    assert response.json()["error"]["code"] == "JOB_NOT_READY"
+

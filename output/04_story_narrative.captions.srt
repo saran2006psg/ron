@@ -1,0 +1,42 @@
+1
+00:00:00,000 --> 00:00:02,203
+Once upon a time, in a small
+village
+
+2
+00:00:02,203 --> 00:00:04,528
+surrounded by mountains,
+there lived a
+
+3
+00:00:04,528 --> 00:00:06,915
+young girl who dreamed of
+exploring the
+
+4
+00:00:06,915 --> 00:00:07,282
+world.
+
+5
+00:00:07,282 --> 00:00:09,408
+She spent her days reading
+books about
+
+6
+00:00:09,408 --> 00:00:11,255
+distant lands and exotic
+animals.
+
+7
+00:00:11,255 --> 00:00:13,784
+One morning, she packed a
+small bag and
+
+8
+00:00:13,784 --> 00:00:15,988
+set off on an adventure that
+would
+
+9
+00:00:15,988 --> 00:00:17,544
+change her life forever.

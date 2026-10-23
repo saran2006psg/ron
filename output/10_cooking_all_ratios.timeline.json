@@ -1,0 +1,116 @@
+{
+  "job_id": "9db46bc4-7fa1-4b9a-a568-6b65e975784f",
+  "scenes": [
+    {
+      "scene_id": "scene-001",
+      "narration_text": "The art of cooking is about patience and creativity.",
+      "start": 0.0,
+      "end": 3.287,
+      "visual_query": "The art of cooking is about patience and creativity",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2015/08/10/267-135875613_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Life-Of-Vids",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.438
+    },
+    {
+      "scene_id": "scene-002",
+      "narration_text": "A great chef knows how to balance flavors and textures.",
+      "start": 3.287,
+      "end": 6.939,
+      "visual_query": "A great chef knows how to balance flavors and textures",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2024/05/29/214409_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "TonyDias7",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.471
+    },
+    {
+      "scene_id": "scene-003",
+      "narration_text": "From farm-fresh ingredients to the final presentation on the plate, every step matters.",
+      "start": 6.939,
+      "end": 12.051,
+      "visual_query": "farm-fresh ingredients final presentation plate every",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2016/08/08/4315-178218581_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "bottlein",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.438
+    },
+    {
+      "scene_id": "scene-004",
+      "narration_text": "Whether you are making a simple salad or an elaborate five-course meal, the joy of cooking comes from sharing food with the people you love.",
+      "start": 12.051,
+      "end": 21.546,
+      "visual_query": "Whether making simple salad elaborate five-course",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2015/08/08/139-135737102_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Coverr-Free-Footage",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.438
+    },
+    {
+      "scene_id": "scene-005",
+      "narration_text": "Let us explore some amazing recipes that will transform your kitchen into a culinary paradise.",
+      "start": 21.546,
+      "end": 27.024,
+      "visual_query": "Let us explore amazing recipes will",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2019/03/17/22059-325253411_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "11912656",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.357
+    }
+  ],
+  "duration": 27.024
+}

@@ -1,0 +1,32 @@
+{
+  "job_id": "07777da6-dc87-4e77-af54-e9f429c9abe9",
+  "providers": {
+    "narration": {
+      "provider": "edge-tts",
+      "model": "edge-tts-neural",
+      "duration": 17.544,
+      "voice": "en-GB-female"
+    }
+  },
+  "settings": {
+    "aspect_ratios": [
+      "16:9"
+    ],
+    "style": "warm, cinematic, storytelling",
+    "avoid": [],
+    "captions": {
+      "burn_in": true,
+      "srt": true
+    }
+  },
+  "warnings": [
+    "Generated with en-GB-SoniaNeural via edge-tts"
+  ],
+  "cost_estimate": {
+    "value": null,
+    "status": "unavailable"
+  },
+  "render": {
+    "status": "not_rendered"
+  }
+}

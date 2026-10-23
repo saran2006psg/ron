@@ -1,0 +1,27 @@
+1
+00:00:00,000 --> 00:00:02,370
+Welcome to our product
+showcase!
+
+2
+00:00:02,370 --> 00:00:04,840
+This revolutionary device
+features a
+
+3
+00:00:04,840 --> 00:00:06,829
+sleek design and cutting-
+edge
+
+4
+00:00:06,829 --> 00:00:07,584
+technology.
+
+5
+00:00:07,584 --> 00:00:10,525
+Order now and experience the
+future of
+
+6
+00:00:10,525 --> 00:00:11,376
+innovation.

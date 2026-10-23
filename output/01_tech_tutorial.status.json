@@ -1,0 +1,15 @@
+{
+  "job_id": "8934e582-4d4f-4f45-baaa-6290e8b0f4a5",
+  "status": "succeeded",
+  "progress": 100,
+  "error": null,
+  "result_links": {
+    "video_16x9": "http://localhost:8000/artifacts/8934e582-4d4f-4f45-baaa-6290e8b0f4a5/output_16x9.mp4",
+    "timeline": "http://localhost:8000/artifacts/8934e582-4d4f-4f45-baaa-6290e8b0f4a5/timeline.json",
+    "manifest": "http://localhost:8000/artifacts/8934e582-4d4f-4f45-baaa-6290e8b0f4a5/manifest.json",
+    "captions": "http://localhost:8000/artifacts/8934e582-4d4f-4f45-baaa-6290e8b0f4a5/captions.srt"
+  },
+  "warnings": [
+    "Generated with en-IN-NeerjaNeural via edge-tts"
+  ]
+}

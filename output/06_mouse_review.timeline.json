@@ -1,0 +1,76 @@
+{
+  "job_id": "5cd04464-65d5-4777-afc7-1a1e840fac13",
+  "scenes": [
+    {
+      "scene_id": "scene-001",
+      "narration_text": "The mouse is an essential input device for every computer user.",
+      "start": 0.0,
+      "end": 4.547,
+      "visual_query": "computer mouse device desk",
+      "warnings": [
+        "AMBIGUOUS_TERM_REQUIRES_CONTEXT"
+      ],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2026/02/23/336228_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Solarselle77",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.308
+    },
+    {
+      "scene_id": "scene-002",
+      "narration_text": "Whether you prefer a wired or wireless mouse, ergonomic design matters for long hours of work.",
+      "start": 4.547,
+      "end": 11.16,
+      "visual_query": "wireless mouse technology device",
+      "warnings": [
+        "AMBIGUOUS_TERM_REQUIRES_CONTEXT"
+      ],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2020/05/04/38084-416330724_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "mephala1980",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.308
+    },
+    {
+      "scene_id": "scene-003",
+      "narration_text": "Modern mice come with programmable buttons and adjustable sensitivity.",
+      "start": 11.16,
+      "end": 14.88,
+      "visual_query": "Modern mice come programmable buttons adjustable",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2025/04/22/273726_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "lursumr",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.4
+    }
+  ],
+  "duration": 14.88
+}

@@ -1,0 +1,94 @@
+{
+  "job_id": "5f346a67-ce6c-4e04-8c26-b7fdfd43ab96",
+  "scenes": [
+    {
+      "scene_id": "scene-001",
+      "narration_text": "Renewable energy is the future of our planet.",
+      "start": 0.0,
+      "end": 4.56,
+      "visual_query": "solar panels on rooftop",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2021/05/02/72837-545276870_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Stdudioray",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.25
+    },
+    {
+      "scene_id": "scene-002",
+      "narration_text": "Wind farms generate clean electricity at scale.",
+      "start": 4.56,
+      "end": 8.55,
+      "visual_query": "wind turbines in open field",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2025/05/27/282086_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Matthias_Groeneveld",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.308
+    },
+    {
+      "scene_id": "scene-003",
+      "narration_text": "Electric vehicles are reducing carbon emissions.",
+      "start": 8.55,
+      "end": 11.97,
+      "visual_query": "electric car charging at station",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2024/02/15/200682-913478723_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "JuliusH",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.308
+    },
+    {
+      "scene_id": "scene-004",
+      "narration_text": "Together, we can build a sustainable tomorrow.",
+      "start": 11.97,
+      "end": 15.96,
+      "visual_query": "green city aerial view",
+      "warnings": [],
+      "clip": {
+        "asset_url": "https://cdn.pixabay.com/video/2026/09/16/376746_large.mp4",
+        "provider": "pixabay",
+        "license_name": "Pixabay Content License",
+        "license_url": "https://pixabay.com/service/license-summary/",
+        "creator": "Media_Hopper_Studio",
+        "attribution": null,
+        "commercial_use": true,
+        "watermark_free": true,
+        "ai_generated": false,
+        "rights_verified": true
+      },
+      "selection_reason": "TOKEN_OVERLAP_BASELINE",
+      "relevance_score": 0.308
+    }
+  ],
+  "duration": 15.96
+}

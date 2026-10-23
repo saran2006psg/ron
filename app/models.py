@@ -71,3 +71,17 @@ class JobStatus(BaseModel):
     result_links: dict[str, str] = Field(default_factory=dict)
     warnings: list[str] = Field(default_factory=list)
 
+
+class SwapClipRequest(BaseModel):
+    scene_id: str = Field(min_length=1, max_length=50)
+    new_query: str | None = Field(default=None, max_length=500)
+    new_asset_url: str | None = Field(default=None, max_length=2000)
+
+
+class SwapClipResponse(BaseModel):
+    job_id: str
+    scene_id: str
+    swapped_clip: dict
+    re_render_seconds: float
+    result_links: dict[str, str]
+
