@@ -38,6 +38,15 @@ Last verified: 2026-10-21
 - **Restrictions & Safety Filters**: No selling of unaltered copies, no depiction of identifiable individuals in bad light, trademark restrictions enforced via keyword safety gating.
 - **Integration**: `app/providers/footage.py` (`PixabayVideoProvider`), configured via `MultiSourceFootageProvider` for automated failover.
 
+### Additional Live Stock Source: Coverr Video API
+- **Provider Name**: Coverr.co
+- **Terms & Licence URL**: https://coverr.co/license
+- **Date Checked**: 2026-10-23
+- **Commercial Use Decision**: **APPROVED**. All videos on Coverr are free to download and use commercially without attribution.
+- **Attribution Policy**: Not required. Captured in `timeline.json`.
+- **Restrictions & Safety Filters**: No redistributing unmodified videos as standalone stock media; model release protections for sensitive portrayals.
+- **Integration**: `app/providers/footage.py` (`CoverrVideoProvider`), configured via `MultiSourceFootageProvider` for live dual-source retrieval.
+
 ---
 
 ## 3. Production Narration / TTS Approval Record

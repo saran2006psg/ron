@@ -262,6 +262,67 @@ class PixabayVideoProvider:
         return candidates
 
 
+class CoverrVideoProvider:
+    """Coverr stock video provider using Coverr Developer API."""
+    license_url = "https://coverr.co/license"
+
+    def __init__(self, api_key: str) -> None:
+        if not api_key:
+            raise ValueError("COVERR_API_KEY is required")
+        self.api_key = api_key
+
+    def search(self, query: str, avoid: list[str]) -> list[FootageCandidate]:
+        retrieval_time = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        clean_q = re.sub(r"[#\r\n\t,;:\"'?!()\[\]{}]", " ", query).strip()
+        clean_q = re.sub(r"\s+", " ", clean_q)
+        if len(clean_q) > 60:
+            clean_q = " ".join(clean_q.split()[:4])
+
+        headers = {
+            "Authorization": f"Bearer {self.api_key}",
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+        }
+        try:
+            response = httpx.get(
+                "https://api.coverr.co/videos",
+                headers=headers,
+                params={"query": clean_q, "page_size": 15},
+                timeout=20
+            )
+            response.raise_for_status()
+        except httpx.HTTPError as exc:
+            log.warning("Coverr API error: %s", exc)
+            raise ProviderUnavailableError(f"PROVIDER_UNAVAILABLE: Coverr - {exc}") from exc
+
+        candidates = []
+        avoid_lower = {a.lower() for a in avoid}
+        hits = response.json().get("hits", [])
+        for hit in hits:
+            tags = [t.lower() for t in hit.get("tags", [])]
+            if any(term in tags for term in avoid_lower):
+                continue
+            base_fn = hit.get("base_filename")
+            if not base_fn:
+                continue
+            # Coverr CDN 1080p MP4 URL
+            mp4_url = f"https://cdn.coverr.co/videos/{base_fn}/1080p.mp4"
+            candidates.append(FootageCandidate(
+                asset_url=mp4_url,
+                provider="coverr",
+                license_name="Coverr Free Commercial License",
+                license_url=self.license_url,
+                creator=hit.get("title") or "Coverr Creator",
+                attribution=None,
+                commercial_use=True,
+                watermark_free=True,
+                ai_generated=bool(hit.get("is_ai_generated", False)),
+                rights_verified=True,
+                rationale=f"Coverr API match for '{clean_q}'",
+                retrieval_time=retrieval_time
+            ))
+        return candidates
+
+
 # ---------------------------------------------------------------------------
 # Multi-source provider with automatic failover
 # ---------------------------------------------------------------------------
@@ -335,7 +396,8 @@ def download_clip(url: str, dest: Path, timeout: int = 60) -> Path:
         shutil.copyfile(src, dest)
         return dest
     try:
-        with httpx.stream("GET", url, timeout=timeout, follow_redirects=True) as r:
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"}
+        with httpx.stream("GET", url, headers=headers, timeout=timeout, follow_redirects=True) as r:
             r.raise_for_status()
             content_type = r.headers.get("content-type", "")
             if "video" not in content_type and "octet-stream" not in content_type:

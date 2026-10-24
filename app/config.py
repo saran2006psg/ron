@@ -32,6 +32,7 @@ class Settings:
     footage_provider: str = os.getenv("FOOTAGE_PROVIDER", "mock")
     pexels_api_key: str | None = os.getenv("PEXELS_API_KEY") or None
     pixabay_api_key: str | None = os.getenv("PIXABAY_API_KEY") or None
+    coverr_api_key: str | None = os.getenv("COVERR_API_KEY") or None
     tts_provider: str = os.getenv("TTS_PROVIDER", "mock")
     max_audio_seconds: int = int(os.getenv("MAX_AUDIO_SECONDS", "600"))
     max_upload_bytes: int = int(os.getenv("MAX_UPLOAD_BYTES", str(100 * 1024 * 1024)))

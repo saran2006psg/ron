@@ -78,3 +78,10 @@ def test_safety_filter_respects_user_avoid():
     filtered = apply_safety_filter(clips, ["cats"])
     assert len(filtered) == 1
     assert filtered[0].asset_url == "a"
+
+
+def test_coverr_provider_requires_api_key():
+    from app.providers.footage import CoverrVideoProvider
+    with pytest.raises(ValueError, match="COVERR_API_KEY is required"):
+        CoverrVideoProvider("")
+

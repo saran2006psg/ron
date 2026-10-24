@@ -11,7 +11,7 @@ from ..config import settings
 from ..models import JobState
 from ..providers.audio import AudioTiming, AudioValidationError, EdgeTTSProvider, MockNarrationProvider
 from ..providers.footage import (
-    DemoFootageProvider, FootageCandidate, MockFootageProvider,
+    CoverrVideoProvider, DemoFootageProvider, FootageCandidate, MockFootageProvider,
     MultiSourceFootageProvider, PexelsVideoProvider, PixabayVideoProvider,
     ProviderUnavailableError, apply_safety_filter, download_clip, eligible,
 )
@@ -43,18 +43,31 @@ def _get_footage_provider():
         return MultiSourceFootageProvider(primary, secondary)
     elif settings.footage_provider == "pixabay":
         primary = PixabayVideoProvider(settings.pixabay_api_key)
-        secondary = PexelsVideoProvider(settings.pexels_api_key) if settings.pexels_api_key else DemoFootageProvider(settings.work_dir, settings.ffmpeg_bin)
+        secondary = None
+        if settings.coverr_api_key:
+            secondary = CoverrVideoProvider(settings.coverr_api_key)
+        elif settings.pexels_api_key:
+            secondary = PexelsVideoProvider(settings.pexels_api_key)
+        else:
+            secondary = DemoFootageProvider(settings.work_dir, settings.ffmpeg_bin)
+        return MultiSourceFootageProvider(primary, secondary)
+    elif settings.footage_provider == "coverr":
+        primary = CoverrVideoProvider(settings.coverr_api_key)
+        secondary = PixabayVideoProvider(settings.pixabay_api_key) if settings.pixabay_api_key else DemoFootageProvider(settings.work_dir, settings.ffmpeg_bin)
         return MultiSourceFootageProvider(primary, secondary)
     elif settings.footage_provider == "multi":
-        providers = []
         primary = None
         secondary = None
-        if settings.pexels_api_key:
-            primary = PexelsVideoProvider(settings.pexels_api_key)
         if settings.pixabay_api_key:
-            secondary = PixabayVideoProvider(settings.pixabay_api_key)
-        if primary:
+            primary = PixabayVideoProvider(settings.pixabay_api_key)
+        if settings.coverr_api_key:
+            secondary = CoverrVideoProvider(settings.coverr_api_key)
+        elif settings.pexels_api_key:
+            secondary = PexelsVideoProvider(settings.pexels_api_key)
+        if primary and secondary:
             return MultiSourceFootageProvider(primary, secondary)
+        elif primary:
+            return MultiSourceFootageProvider(primary)
         elif secondary:
             return MultiSourceFootageProvider(secondary)
         return MockFootageProvider()
